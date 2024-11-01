@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faux Nitro Boost</title>
+    <style>
+        /* Style de base */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff7eb3, #ff758c, #ffab76);
+            animation: gradient 5s ease infinite;
+            overflow: hidden;
+        }
+
+        /* Animation de fond en dégradé */
+        @keyframes gradient {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        /* Conteneur principal */
+        .container {
+            text-align: center;
+            color: #fff;
+        }
+
+        /* Style du titre */
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            text-shadow: 2px 2px #ff758c;
+            animation: pop 1s infinite alternate;
+        }
+
+        /* Style du bouton "Réclamer" */
+        .claim-button {
+            font-size: 1.5em;
+            padding: 15px 30px;
+            color: #fff;
+            background-color: #ff4f81;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, background-color 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        .claim-button:hover {
+            background-color: #ff7a95;
+            transform: scale(1.1);
+        }
+
+        /* Effets d'animation pour le titre et le bouton */
+        @keyframes bounce {
+            0%, 100% {transform: translateY(0);}
+            50% {transform: translateY(-10px);}
+        }
+
+        @keyframes pop {
+            0% {transform: scale(1);}
+            100% {transform: scale(1.05);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Obtenez votre Faux Nitro Boost!</h1>
+        <button class="claim-button" onclick="claimNitro()">Réclamer votre Code</button>
+    </div>
+
+    <script>
+        function claimNitro() {
+            // Demande l'autorisation d'accéder à la localisation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
+            }
+        }
+
+        function showPosition(position) {
+            alert("Bravo ! Vous avez trouvé le code magique : FAKE-BOOST-1234 !\n"
+                + "Vous êtes situé près de : Latitude " + position.coords.latitude +
+                ", Longitude " + position.coords.longitude);
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Localisation refusée. Vous n'aurez pas de code magique !");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Les informations de localisation ne sont pas disponibles.");
+                    break;
+                case error.TIMEOUT:
+                    alert("La demande de localisation a expiré.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("Une erreur inconnue est survenue.");
+                    break;
+            }
+        }
+    </script>
+
+</body>
+</html>
